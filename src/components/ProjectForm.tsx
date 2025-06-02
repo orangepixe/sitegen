@@ -63,11 +63,11 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
     <div className="max-w-4xl mx-auto space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">
-            <span className="mr-2">
+          <CardTitle className="flex items-center justify-between">
+            <span className="text-2xl font-semibold text-gray-800">
               {project ? 'Edit Project' : 'Add New Project'}
             </span>
-            <a className="text-sm cursor-pointer" onClick={() => nav(-1)}>Back</a>
+            <a className="text-sm cursor-pointer text-gray-500" onClick={onCancel}>Back</a>
           </CardTitle>
         </CardHeader>
         <CardContent>
