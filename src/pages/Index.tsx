@@ -1,14 +1,31 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useState, useEffect } from 'react';
+import { isAuthenticated } from '@/utils/auth';
+import LoginForm from '@/components/LoginForm';
+import AdminDashboard from '@/components/AdminDashboard';
 
 const Index = () => {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+  const [authenticated, setAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setAuthenticated(isAuthenticated());
+    setLoading(false);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-lg">Loading...</div>
       </div>
-    </div>
-  );
+    );
+  }
+
+  if (!authenticated) {
+    return <LoginForm onLogin={() => setAuthenticated(true)} />;
+  }
+
+  return <AdminDashboard onLogout={() => setAuthenticated(false)} />;
 };
 
 export default Index;
