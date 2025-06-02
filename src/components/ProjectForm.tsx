@@ -119,7 +119,12 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
     <div className="max-w-4xl mx-auto space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">{project ? 'Edit Project' : 'Add New Project'}</CardTitle>
+          <CardTitle className="text-2xl">
+            <span className="mr-2">
+              {project ? 'Edit Project' : 'Add New Project'}
+            </span>
+            <a href="#" onClick={() => setCurrentView('list')}>Back</a>
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-8">
@@ -255,11 +260,9 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
                   <Label htmlFor="price">Price ($)</Label>
                   <Input
                     id="price"
-                    type="number"
-                    step="0.01"
-                    placeholder="0.00"
+                    placeholder="$500 or View Pricing"
                     value={formData.price}
-                    onChange={(e) => setFormData(prev => ({ ...prev, price: parseFloat(e.target.value) || 0 }))}
+                    onChange={(e) => setFormData(prev => ({ ...prev, price: e.target.value || 0 }))}
                     required
                   />
                 </div>

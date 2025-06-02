@@ -39,7 +39,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="admin"
+                placeholder="Enter username"
                 required
               />
             </div>
@@ -50,7 +50,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="admin"
+                placeholder="Enter password"
                 required
               />
             </div>

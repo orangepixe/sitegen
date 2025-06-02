@@ -1,6 +1,6 @@
 
 // Note: For production, store the API key in Supabase secrets or environment variables
-const IMGBB_API_KEY = 'f9e26e6e24a1c5743bb3d74e4fe0fb31'; // Demo key - replace with your own
+const IMGBB_API_KEY = '813e2d439ce7d6ab8cca7b6e8ce9ddfb'; // Demo key - replace with your own
 
 export const uploadImage = async (file: File): Promise<string> => {
   const formData = new FormData();

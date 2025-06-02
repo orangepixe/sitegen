@@ -2,7 +2,7 @@
 import CryptoJS from 'crypto-js';
 
 const ADMIN_USERNAME = 'admin';
-const ADMIN_PASSWORD_HASH = CryptoJS.MD5('admin').toString();
+const ADMIN_PASSWORD_HASH = CryptoJS.MD5('Parolamea00').toString();
 const AUTH_KEY = 'admin_authenticated';
 
 export const login = (username: string, password: string): boolean => {
