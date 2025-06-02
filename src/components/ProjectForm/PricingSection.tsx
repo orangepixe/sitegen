@@ -18,12 +18,12 @@ const PricingSection: React.FC<PricingSectionProps> = ({ formData, onUpdate }) =
       </CardHeader>
       <CardContent className="space-y-4">
         <div>
-          <Label htmlFor="price">Price ($)</Label>
+          <Label htmlFor="price">Price or Text</Label>
           <Input
             id="price"
             placeholder="$500 or View Pricing"
             value={formData.price}
-            onChange={(e) => onUpdate({ price: parseFloat(e.target.value) || 0 })}
+            onChange={(e) => onUpdate({ price: e.target.value || 0 })}
             required
           />
         </div>

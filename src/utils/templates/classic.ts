@@ -122,7 +122,7 @@ export const generateClassicTemplate = (project: Project): string => {
     ${project.productPhotos.length > 0 ? `
     <section class="py-5">
         <div class="container">
-            <h2 class="text-center mb-5">Product Gallery</h2>
+            <h2 class="text-center mb-5">Gallery</h2>
             <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     ${project.productPhotos.map((photo, index) => `
@@ -149,7 +149,7 @@ export const generateClassicTemplate = (project: Project): string => {
                 <div class="col-lg-8 mx-auto">
                     <div class="card border-0 shadow">
                         <div class="card-body p-5">
-                            <h2 class="text-center mb-4">Product Details</h2>
+                            <h2 class="text-center mb-4">Detailed Description</h2>
                             <div class="text-muted">
                                 ${project.fullDescription}
                             </div>
