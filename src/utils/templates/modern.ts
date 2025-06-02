@@ -89,7 +89,7 @@ export const generateModernTemplate = (project: Project): string => {
     <!-- Description Section -->
     <section class="py-16 bg-gray-50">
         <h2 class="text-3xl font-bold mb-8 text-gray-800 text-center">Details</h2>
-        <div class="w-full mx-auto px-4">
+        <div class="max-w-6xl mx-auto px-4">
             <div class="bg-white rounded-lg shadow-lg p-4">
                 <div class="prose max-w-none text-gray-600">
                     ${project.fullDescription}

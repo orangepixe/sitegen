@@ -64,7 +64,7 @@ export const generateClassicTemplate = (project: Project): string => {
                         <span class="h2 fw-bold text-warning">${project.price}</span>
                     </div>
                     <button onclick="trackAndRedirect()" class="btn btn-warning btn-lg px-5 py-3">
-                        <i class="fas fa-shopping-cart me-2"></i>${project.buyButtonText}
+                        <i class="fas fa-star me-2"></i>${project.buyButtonText}
                     </button>
                 </div>
                 ${project.productPhotos.length > 0 ? `
@@ -171,7 +171,7 @@ export const generateClassicTemplate = (project: Project): string => {
                         <span class="h1 fw-bold text-warning">${project.price}</span>
                     </div>
                     <button onclick="trackAndRedirect()" class="btn btn-warning btn-lg px-5 py-3">
-                        <i class="fas fa-shopping-cart me-2"></i>${project.buyButtonText}
+                        <i class="fas fa-star me-2"></i>${project.buyButtonText}
                     </button>
                 </div>
             </div>
