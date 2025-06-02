@@ -117,6 +117,10 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
     }));
   };
 
+  const goBack = (event) => {
+    event.preventDefault();
+    setCurrentView('list');
+  }
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <Card>
@@ -125,7 +129,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
             <span className="mr-2">
               {project ? 'Edit Project' : 'Add New Project'}
             </span>
-            <a href="#" onClick={() => setCurrentView('list')}>Back</a>
+            <a className="text-sm" href="#" onClick={goBack($event)}>Back</a>
           </CardTitle>
         </CardHeader>
         <CardContent>
