@@ -69,7 +69,7 @@ export const generateModernTemplate = (project: Project): string => {
     ${project.productPhotos.length > 0 ? `
     <section class="py-16 bg-white">
         <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Product Gallery</h2>
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Gallery</h2>
             <div class="swiper productSwiper">
                 <div class="swiper-wrapper">
                     ${project.productPhotos.map(photo => `
@@ -90,7 +90,7 @@ export const generateModernTemplate = (project: Project): string => {
     <section class="py-16 bg-gray-50">
         <div class="max-w-4xl mx-auto px-4">
             <div class="bg-white rounded-lg shadow-lg p-8">
-                <h2 class="text-3xl font-bold mb-8 text-gray-800 text-center">Product Details</h2>
+                <h2 class="text-3xl font-bold mb-8 text-gray-800 text-center">Details</h2>
                 <div class="prose max-w-none text-gray-600">
                     ${project.fullDescription}
                 </div>
