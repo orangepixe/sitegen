@@ -9,6 +9,7 @@ export interface Project {
   fullDescription: string;
   price: number;
   buyButtonText: string;
+  mainWebsiteUrl: string;
   template: 'modern' | 'classic';
   extraFields?: Record<string, any>;
   createdAt: string;
