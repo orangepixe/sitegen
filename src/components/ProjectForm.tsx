@@ -70,22 +70,20 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
             <a className="text-sm cursor-pointer text-gray-500" onClick={onCancel}>Back</a>
           </CardTitle>
         </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-8">
-            <BasicInfoSection formData={formData} onUpdate={updateFormData} />
-            <ProductContentSection formData={formData} onUpdate={updateFormData} />
-            <ImagesSection formData={formData} onUpdate={updateFormData} />
-            <PricingSection formData={formData} onUpdate={updateFormData} />
-            <LinksSection formData={formData} onUpdate={updateFormData} />
-            <TemplateSection formData={formData} onUpdate={updateFormData} />
-
-            <div className="flex gap-2 pt-4">
-              <Button type="submit">{project ? 'Update' : 'Create'} Project</Button>
-              <Button type="button" variant="outline" onClick={onCancel}>Cancel</Button>
-            </div>
-          </form>
-        </CardContent>
       </Card>
+      <form onSubmit={handleSubmit} className="space-y-8">
+        <BasicInfoSection formData={formData} onUpdate={updateFormData} />
+        <ProductContentSection formData={formData} onUpdate={updateFormData} />
+        <ImagesSection formData={formData} onUpdate={updateFormData} />
+        <PricingSection formData={formData} onUpdate={updateFormData} />
+        <LinksSection formData={formData} onUpdate={updateFormData} />
+        <TemplateSection formData={formData} onUpdate={updateFormData} />
+
+        <div className="flex gap-2 pt-4">
+          <Button type="submit">{project ? 'Update' : 'Create'} Project</Button>
+          <Button type="button" variant="outline" onClick={onCancel}>Cancel</Button>
+        </div>
+      </form>
     </div>
   );
 };
