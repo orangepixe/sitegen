@@ -11,6 +11,7 @@ import { Upload, X } from 'lucide-react';
 import { Project } from '@/types/project';
 import { templates } from '@/utils/templates';
 import { uploadImage } from '@/utils/imageUpload';
+import { useNavigate} from "react-router-dom";
 
 interface ProjectFormProps {
   project?: Project;
@@ -117,10 +118,8 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
     }));
   };
 
-  const goBack = (event) => {
-    event.preventDefault();
-    setCurrentView('list');
-  }
+  const nav = useNavigate();
+
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <Card>
@@ -129,7 +128,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
             <span className="mr-2">
               {project ? 'Edit Project' : 'Add New Project'}
             </span>
-            <a className="text-sm" href="#" onClick={goBack($event)}>Back</a>
+            <a className="text-sm cursor-pointer"  onClick={() => nav(-1)}>Back</a>
           </CardTitle>
         </CardHeader>
         <CardContent>
