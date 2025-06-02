@@ -15,7 +15,7 @@ const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({ formData, onUpdate 
     <div>
       <div className="text-lg">Basic Info</div>
       <Card>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 py-3">
           <div>
             <Label htmlFor="websiteName">Website Name</Label>
             <Input
