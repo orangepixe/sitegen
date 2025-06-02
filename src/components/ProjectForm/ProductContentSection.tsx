@@ -12,24 +12,24 @@ interface ProductContentSectionProps {
 
 const ProductContentSection: React.FC<ProductContentSectionProps> = ({ formData, onUpdate }) => {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-lg">Product Content</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div>
-          <Label htmlFor="fullDescription">Full HTML Description</Label>
-          <Textarea
-            id="fullDescription"
-            placeholder="Enter detailed product description with HTML formatting"
-            value={formData.fullDescription}
-            onChange={(e) => onUpdate({ fullDescription: e.target.value })}
-            rows={8}
-            required
-          />
-        </div>
-      </CardContent>
-    </Card>
+    <div>
+      <div className="text-lg mb-2">Product Content</div>
+      <Card>
+        <CardContent className="space-y-4 py-3">
+          <div>
+            <Label htmlFor="fullDescription">Full HTML Description</Label>
+            <Textarea
+              id="fullDescription"
+              placeholder="Enter detailed product description with HTML formatting"
+              value={formData.fullDescription}
+              onChange={(e) => onUpdate({ fullDescription: e.target.value })}
+              rows={8}
+              required
+            />
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 

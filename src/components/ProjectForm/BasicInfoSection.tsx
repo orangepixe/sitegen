@@ -13,7 +13,7 @@ interface BasicInfoSectionProps {
 const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({ formData, onUpdate }) => {
   return (
     <div>
-      <div className="text-lg">Basic Info</div>
+      <div className="text-lg mb-2">Basic Info</div>
       <Card>
         <CardContent className="space-y-4 py-3">
           <div>

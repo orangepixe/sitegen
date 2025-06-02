@@ -77,64 +77,64 @@ const ImagesSection: React.FC<ImagesSectionProps> = ({ formData, onUpdate }) => 
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="text-lg">Images</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-6">
-        <div>
-          <Label htmlFor="logo">Logo Upload</Label>
-          <div className="space-y-2">
-            <Input
-              id="logo"
-              type="file"
-              accept="image/*"
-              onChange={handleLogoUpload}
-              disabled={logoUploading}
-            />
-            {logoUploading && <p className="text-sm text-gray-500">Uploading logo...</p>}
-            {formData.logo && (
-              <div className="flex items-center gap-2 p-2 border rounded">
-                <img src={formData.logo} alt="Logo" className="w-16 h-16 object-cover rounded" />
-                <span className="flex-1 text-sm">Logo uploaded</span>
-                <Button 
-                  type="button" 
-                  variant="destructive" 
-                  size="sm" 
-                  onClick={() => onUpdate({ logo: undefined })}
-                >
-                  <X className="w-4 h-4" />
-                </Button>
-              </div>
-            )}
+    <div>
+      <CardTitle className="text-lg mb-2">Images</CardTitle>
+      <Card>
+        <CardContent className="space-y-6 py-4">
+          <div>
+            <Label htmlFor="logo">Logo Upload</Label>
+            <div className="space-y-2">
+              <Input
+                id="logo"
+                type="file"
+                accept="image/*"
+                onChange={handleLogoUpload}
+                disabled={logoUploading}
+              />
+              {logoUploading && <p className="text-sm text-gray-500">Uploading logo...</p>}
+              {formData.logo && (
+                <div className="flex items-center gap-2 p-2 border rounded">
+                  <img src={formData.logo} alt="Logo" className="w-16 h-16 object-cover rounded" />
+                  <span className="flex-1 text-sm">Logo uploaded</span>
+                  <Button 
+                    type="button" 
+                    variant="destructive" 
+                    size="sm" 
+                    onClick={() => onUpdate({ logo: undefined })}
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
 
-        <div>
-          <Label htmlFor="productPhotos">Product Photos</Label>
-          <div className="space-y-2">
-            <Input
-              id="productPhotos"
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={handlePhotoUpload}
-              disabled={photosUploading}
-            />
-            {photosUploading && <p className="text-sm text-gray-500">Uploading photos...</p>}
-            {formData.productPhotos?.map((photo, index) => (
-              <div key={index} className="flex items-center gap-2 p-2 border rounded">
-                <img src={photo} alt={`Product ${index + 1}`} className="w-16 h-16 object-cover rounded" />
-                <span className="flex-1 text-sm">Photo {index + 1}</span>
-                <Button type="button" variant="destructive" size="sm" onClick={() => removePhoto(index)}>
-                  <X className="w-4 h-4" />
-                </Button>
-              </div>
-            ))}
+          <div>
+            <Label htmlFor="productPhotos">Product Photos</Label>
+            <div className="space-y-2">
+              <Input
+                id="productPhotos"
+                type="file"
+                accept="image/*"
+                multiple
+                onChange={handlePhotoUpload}
+                disabled={photosUploading}
+              />
+              {photosUploading && <p className="text-sm text-gray-500">Uploading photos...</p>}
+              {formData.productPhotos?.map((photo, index) => (
+                <div key={index} className="flex items-center gap-2 p-2 border rounded">
+                  <img src={photo} alt={`Product ${index + 1}`} className="w-16 h-16 object-cover rounded" />
+                  <span className="flex-1 text-sm">Photo {index + 1}</span>
+                  <Button type="button" variant="destructive" size="sm" onClick={() => removePhoto(index)}>
+                    <X className="w-4 h-4" />
+                  </Button>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 
