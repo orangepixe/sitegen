@@ -50,7 +50,7 @@ export const generateModernTemplate = (project: Project): string => {
                     <h1 class="text-5xl font-bold mb-6 leading-tight">${project.productTitle}</h1>
                     <p class="text-xl mb-8 text-blue-100">${project.shortDescription}</p>
                     <div class="space-y-4">
-                        <div class="text-3xl font-bold">$${project.price}</div>
+                        <div class="text-3xl font-bold">${project.price}</div>
                         <button onclick="trackAndRedirect()" class="inline-block bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition transform hover:scale-105 cursor-pointer">
                             ${project.buyButtonText}
                         </button>
@@ -88,9 +88,9 @@ export const generateModernTemplate = (project: Project): string => {
 
     <!-- Description Section -->
     <section class="py-16 bg-gray-50">
-        <div class="max-w-4xl mx-auto px-4">
-            <div class="bg-white rounded-lg shadow-lg p-8">
-                <h2 class="text-3xl font-bold mb-8 text-gray-800 text-center">Details</h2>
+        <h2 class="text-3xl font-bold mb-8 text-gray-800 text-center">Details</h2>
+        <div class="w-full mx-auto px-4">
+            <div class="bg-white rounded-lg shadow-lg p-4">
                 <div class="prose max-w-none text-gray-600">
                     ${project.fullDescription}
                 </div>
@@ -140,7 +140,7 @@ export const generateModernTemplate = (project: Project): string => {
             <h2 class="text-4xl font-bold mb-6">Ready to Get Started?</h2>
             <p class="text-xl mb-8 text-blue-100">Join thousands of satisfied customers who love ${project.productTitle}</p>
             <div class="space-y-4">
-                <div class="text-4xl font-bold">$${project.price}</div>
+                <div class="text-4xl font-bold">${project.price}</div>
                 <button onclick="trackAndRedirect()" class="inline-block bg-white text-blue-600 px-12 py-4 rounded-lg text-xl font-semibold hover:bg-gray-100 transition transform hover:scale-105 shadow-lg cursor-pointer">
                     ${project.buyButtonText}
                 </button>

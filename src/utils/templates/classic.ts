@@ -61,7 +61,7 @@ export const generateClassicTemplate = (project: Project): string => {
                     <h1 class="display-4 fw-bold mb-4">${project.productTitle}</h1>
                     <p class="lead mb-4">${project.shortDescription}</p>
                     <div class="mb-4">
-                        <span class="h2 fw-bold text-warning">$${project.price}</span>
+                        <span class="h2 fw-bold text-warning">${project.price}</span>
                     </div>
                     <button onclick="trackAndRedirect()" class="btn btn-warning btn-lg px-5 py-3">
                         <i class="fas fa-shopping-cart me-2"></i>${project.buyButtonText}
@@ -146,10 +146,10 @@ export const generateClassicTemplate = (project: Project): string => {
     <section class="py-5 bg-light">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 mx-auto">
+                <div class="col-12">
+                    <h2 class="text-center mb-4">Detailed Description</h2>
                     <div class="card border-0 shadow">
-                        <div class="card-body p-5">
-                            <h2 class="text-center mb-4">Detailed Description</h2>
+                        <div class="card-body p-4">
                             <div class="text-muted">
                                 ${project.fullDescription}
                             </div>
@@ -168,7 +168,7 @@ export const generateClassicTemplate = (project: Project): string => {
                     <h2 class="display-5 mb-4">Ready to Order?</h2>
                     <p class="lead mb-4">Join thousands of satisfied customers who love ${project.productTitle}</p>
                     <div class="mb-4">
-                        <span class="h1 fw-bold text-warning">$${project.price}</span>
+                        <span class="h1 fw-bold text-warning">${project.price}</span>
                     </div>
                     <button onclick="trackAndRedirect()" class="btn btn-warning btn-lg px-5 py-3">
                         <i class="fas fa-shopping-cart me-2"></i>${project.buyButtonText}
