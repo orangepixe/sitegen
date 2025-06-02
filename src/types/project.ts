@@ -10,6 +10,7 @@ export interface Project {
   price: number;
   buyButtonText: string;
   mainWebsiteUrl: string;
+  googleAdsScript?: string;
   template: 'modern' | 'classic';
   extraFields?: Record<string, any>;
   createdAt: string;

@@ -1,7 +1,8 @@
-
 import { Project, Template } from '@/types/project';
 
 const generateModernTemplate = (project: Project): string => {
+  const trackingScript = project.googleAdsScript ? project.googleAdsScript : '';
+  
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +17,7 @@ const generateModernTemplate = (project: Project): string => {
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    ${trackingScript}
 </head>
 <body class="bg-gray-50">
     <!-- Navigation Header -->
@@ -27,14 +29,14 @@ const generateModernTemplate = (project: Project): string => {
                     <span class="text-xl font-bold text-gray-800">${project.websiteName}</span>
                 </div>
                 <div class="hidden md:flex space-x-8">
-                    <a href="${project.mainWebsiteUrl}" class="text-gray-600 hover:text-blue-600 transition">Home</a>
-                    <a href="${project.mainWebsiteUrl}" class="text-gray-600 hover:text-blue-600 transition">About</a>
-                    <a href="${project.mainWebsiteUrl}" class="text-gray-600 hover:text-blue-600 transition">Products</a>
-                    <a href="${project.mainWebsiteUrl}" class="text-gray-600 hover:text-blue-600 transition">Contact</a>
+                    <a href="#" onclick="redirectToMain()" class="text-gray-600 hover:text-blue-600 transition cursor-pointer">Home</a>
+                    <a href="#" onclick="redirectToMain()" class="text-gray-600 hover:text-blue-600 transition cursor-pointer">About</a>
+                    <a href="#" onclick="redirectToMain()" class="text-gray-600 hover:text-blue-600 transition cursor-pointer">Products</a>
+                    <a href="#" onclick="redirectToMain()" class="text-gray-600 hover:text-blue-600 transition cursor-pointer">Contact</a>
                 </div>
-                <a href="${project.mainWebsiteUrl}" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                <button onclick="trackAndRedirect()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
                     Get Started
-                </a>
+                </button>
             </div>
         </div>
     </nav>
@@ -48,9 +50,9 @@ const generateModernTemplate = (project: Project): string => {
                     <p class="text-xl mb-8 text-blue-100">${project.shortDescription}</p>
                     <div class="space-y-4">
                         <div class="text-3xl font-bold">$${project.price}</div>
-                        <a href="${project.mainWebsiteUrl}" class="inline-block bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition transform hover:scale-105">
+                        <button onclick="trackAndRedirect()" class="inline-block bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition transform hover:scale-105 cursor-pointer">
                             ${project.buyButtonText}
-                        </a>
+                        </button>
                     </div>
                 </div>
                 ${project.productPhotos.length > 0 ? `
@@ -138,9 +140,9 @@ const generateModernTemplate = (project: Project): string => {
             <p class="text-xl mb-8 text-blue-100">Join thousands of satisfied customers who love ${project.productTitle}</p>
             <div class="space-y-4">
                 <div class="text-4xl font-bold">$${project.price}</div>
-                <a href="${project.mainWebsiteUrl}" class="inline-block bg-white text-blue-600 px-12 py-4 rounded-lg text-xl font-semibold hover:bg-gray-100 transition transform hover:scale-105 shadow-lg">
+                <button onclick="trackAndRedirect()" class="inline-block bg-white text-blue-600 px-12 py-4 rounded-lg text-xl font-semibold hover:bg-gray-100 transition transform hover:scale-105 shadow-lg cursor-pointer">
                     ${project.buyButtonText}
-                </a>
+                </button>
             </div>
         </div>
     </section>
@@ -156,27 +158,27 @@ const generateModernTemplate = (project: Project): string => {
                 <div>
                     <h4 class="font-semibold mb-4">Quick Links</h4>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="${project.mainWebsiteUrl}" class="hover:text-white transition">Home</a></li>
-                        <li><a href="${project.mainWebsiteUrl}" class="hover:text-white transition">About</a></li>
-                        <li><a href="${project.mainWebsiteUrl}" class="hover:text-white transition">Products</a></li>
-                        <li><a href="${project.mainWebsiteUrl}" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="#" onclick="redirectToMain()" class="hover:text-white transition cursor-pointer">Home</a></li>
+                        <li><a href="#" onclick="redirectToMain()" class="hover:text-white transition cursor-pointer">About</a></li>
+                        <li><a href="#" onclick="redirectToMain()" class="hover:text-white transition cursor-pointer">Products</a></li>
+                        <li><a href="#" onclick="redirectToMain()" class="hover:text-white transition cursor-pointer">Contact</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-semibold mb-4">Support</h4>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="${project.mainWebsiteUrl}" class="hover:text-white transition">FAQ</a></li>
-                        <li><a href="${project.mainWebsiteUrl}" class="hover:text-white transition">Shipping</a></li>
-                        <li><a href="${project.mainWebsiteUrl}" class="hover:text-white transition">Returns</a></li>
-                        <li><a href="${project.mainWebsiteUrl}" class="hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" onclick="redirectToMain()" class="hover:text-white transition cursor-pointer">FAQ</a></li>
+                        <li><a href="#" onclick="redirectToMain()" class="hover:text-white transition cursor-pointer">Shipping</a></li>
+                        <li><a href="#" onclick="redirectToMain()" class="hover:text-white transition cursor-pointer">Returns</a></li>
+                        <li><a href="#" onclick="redirectToMain()" class="hover:text-white transition cursor-pointer">Contact Us</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-semibold mb-4">Connect</h4>
                     <div class="flex space-x-4">
-                        <a href="${project.mainWebsiteUrl}" class="text-gray-400 hover:text-white transition">Facebook</a>
-                        <a href="${project.mainWebsiteUrl}" class="text-gray-400 hover:text-white transition">Twitter</a>
-                        <a href="${project.mainWebsiteUrl}" class="text-gray-400 hover:text-white transition">Instagram</a>
+                        <a href="#" onclick="redirectToMain()" class="text-gray-400 hover:text-white transition cursor-pointer">Facebook</a>
+                        <a href="#" onclick="redirectToMain()" class="text-gray-400 hover:text-white transition cursor-pointer">Twitter</a>
+                        <a href="#" onclick="redirectToMain()" class="text-gray-400 hover:text-white transition cursor-pointer">Instagram</a>
                     </div>
                 </div>
             </div>
@@ -202,12 +204,31 @@ const generateModernTemplate = (project: Project): string => {
                 disableOnInteraction: false,
             },
         });
+
+        function trackAndRedirect() {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-CONVERSION_ID/label',
+                    'event_callback': function() {
+                        window.location.href = '${project.mainWebsiteUrl}';
+                    }
+                });
+            } else {
+                window.location.href = '${project.mainWebsiteUrl}';
+            }
+        }
+
+        function redirectToMain() {
+            window.location.href = '${project.mainWebsiteUrl}';
+        }
     </script>
 </body>
 </html>`;
 };
 
 const generateClassicTemplate = (project: Project): string => {
+  const trackingScript = project.googleAdsScript ? project.googleAdsScript : '';
+  
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -222,12 +243,13 @@ const generateClassicTemplate = (project: Project): string => {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    ${trackingScript}
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="${project.mainWebsiteUrl}">
+            <a class="navbar-brand d-flex align-items-center" href="#" onclick="redirectToMain()">
                 ${project.logo ? `<img src="${project.logo}" alt="${project.websiteName}" height="40" class="me-2">` : ''}
                 <span class="fw-bold">${project.websiteName}</span>
             </a>
@@ -237,19 +259,19 @@ const generateClassicTemplate = (project: Project): string => {
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="${project.mainWebsiteUrl}">Home</a>
+                        <a class="nav-link" href="#" onclick="redirectToMain()">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${project.mainWebsiteUrl}">About</a>
+                        <a class="nav-link" href="#" onclick="redirectToMain()">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${project.mainWebsiteUrl}">Products</a>
+                        <a class="nav-link" href="#" onclick="redirectToMain()">Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${project.mainWebsiteUrl}">Contact</a>
+                        <a class="nav-link" href="#" onclick="redirectToMain()">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-light ms-2" href="${project.mainWebsiteUrl}">Get Started</a>
+                        <button class="btn btn-light ms-2" onclick="trackAndRedirect()">Get Started</button>
                     </li>
                 </ul>
             </div>
@@ -266,9 +288,9 @@ const generateClassicTemplate = (project: Project): string => {
                     <div class="mb-4">
                         <span class="h2 fw-bold text-warning">$${project.price}</span>
                     </div>
-                    <a href="${project.mainWebsiteUrl}" class="btn btn-warning btn-lg px-5 py-3">
+                    <button onclick="trackAndRedirect()" class="btn btn-warning btn-lg px-5 py-3">
                         <i class="fas fa-shopping-cart me-2"></i>${project.buyButtonText}
-                    </a>
+                    </button>
                 </div>
                 ${project.productPhotos.length > 0 ? `
                 <div class="col-lg-6 text-center">
@@ -373,9 +395,9 @@ const generateClassicTemplate = (project: Project): string => {
                     <div class="mb-4">
                         <span class="h1 fw-bold text-warning">$${project.price}</span>
                     </div>
-                    <a href="${project.mainWebsiteUrl}" class="btn btn-warning btn-lg px-5 py-3">
+                    <button onclick="trackAndRedirect()" class="btn btn-warning btn-lg px-5 py-3">
                         <i class="fas fa-shopping-cart me-2"></i>${project.buyButtonText}
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -392,27 +414,27 @@ const generateClassicTemplate = (project: Project): string => {
                 <div class="col-lg-3 mb-4">
                     <h5>Quick Links</h5>
                     <ul class="list-unstyled">
-                        <li><a href="${project.mainWebsiteUrl}" class="text-muted text-decoration-none">Home</a></li>
-                        <li><a href="${project.mainWebsiteUrl}" class="text-muted text-decoration-none">About</a></li>
-                        <li><a href="${project.mainWebsiteUrl}" class="text-muted text-decoration-none">Products</a></li>
-                        <li><a href="${project.mainWebsiteUrl}" class="text-muted text-decoration-none">Contact</a></li>
+                        <li><a href="#" onclick="redirectToMain()" class="text-muted text-decoration-none">Home</a></li>
+                        <li><a href="#" onclick="redirectToMain()" class="text-muted text-decoration-none">About</a></li>
+                        <li><a href="#" onclick="redirectToMain()" class="text-muted text-decoration-none">Products</a></li>
+                        <li><a href="#" onclick="redirectToMain()" class="text-muted text-decoration-none">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 mb-4">
                     <h5>Support</h5>
                     <ul class="list-unstyled">
-                        <li><a href="${project.mainWebsiteUrl}" class="text-muted text-decoration-none">FAQ</a></li>
-                        <li><a href="${project.mainWebsiteUrl}" class="text-muted text-decoration-none">Shipping Info</a></li>
-                        <li><a href="${project.mainWebsiteUrl}" class="text-muted text-decoration-none">Returns</a></li>
-                        <li><a href="${project.mainWebsiteUrl}" class="text-muted text-decoration-none">Contact Us</a></li>
+                        <li><a href="#" onclick="redirectToMain()" class="text-muted text-decoration-none">FAQ</a></li>
+                        <li><a href="#" onclick="redirectToMain()" class="text-muted text-decoration-none">Shipping Info</a></li>
+                        <li><a href="#" onclick="redirectToMain()" class="text-muted text-decoration-none">Returns</a></li>
+                        <li><a href="#" onclick="redirectToMain()" class="text-muted text-decoration-none">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 mb-4">
                     <h5>Follow Us</h5>
                     <div class="d-flex">
-                        <a href="${project.mainWebsiteUrl}" class="text-muted me-3"><i class="fab fa-facebook fa-2x"></i></a>
-                        <a href="${project.mainWebsiteUrl}" class="text-muted me-3"><i class="fab fa-twitter fa-2x"></i></a>
-                        <a href="${project.mainWebsiteUrl}" class="text-muted me-3"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#" onclick="redirectToMain()" class="text-muted me-3"><i class="fab fa-facebook fa-2x"></i></a>
+                        <a href="#" onclick="redirectToMain()" class="text-muted me-3"><i class="fab fa-twitter fa-2x"></i></a>
+                        <a href="#" onclick="redirectToMain()" class="text-muted me-3"><i class="fab fa-instagram fa-2x"></i></a>
                     </div>
                 </div>
             </div>
@@ -422,6 +444,25 @@ const generateClassicTemplate = (project: Project): string => {
             </div>
         </div>
     </footer>
+
+    <script>
+        function trackAndRedirect() {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-CONVERSION_ID/label',
+                    'event_callback': function() {
+                        window.location.href = '${project.mainWebsiteUrl}';
+                    }
+                });
+            } else {
+                window.location.href = '${project.mainWebsiteUrl}';
+            }
+        }
+
+        function redirectToMain() {
+            window.location.href = '${project.mainWebsiteUrl}';
+        }
+    </script>
 </body>
 </html>`;
 };

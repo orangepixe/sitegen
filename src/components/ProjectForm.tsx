@@ -28,6 +28,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
     price: 0,
     buyButtonText: 'Buy Now',
     mainWebsiteUrl: '',
+    googleAdsScript: '',
     template: 'modern',
     productPhotos: [],
     ...project,
@@ -47,6 +48,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
       price: formData.price || 0,
       buyButtonText: formData.buyButtonText || 'Buy Now',
       mainWebsiteUrl: formData.mainWebsiteUrl || '',
+      googleAdsScript: formData.googleAdsScript || '',
       template: formData.template as 'modern' | 'classic' || 'modern',
       productPhotos: formData.productPhotos || [],
       logo: formData.logo,
@@ -285,7 +287,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
               <CardHeader>
                 <CardTitle className="text-lg">Links & SEO</CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-4">
                 <div>
                   <Label htmlFor="mainWebsiteUrl">Main Website URL</Label>
                   <Input
@@ -296,6 +298,18 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
                     required
                   />
                   <p className="text-sm text-gray-500 mt-1">All buttons and links will redirect to this URL</p>
+                </div>
+
+                <div>
+                  <Label htmlFor="googleAdsScript">Google Ads Tracking Script</Label>
+                  <Textarea
+                    id="googleAdsScript"
+                    placeholder="Paste your Google Ads Global Site Tag or conversion tracking script here"
+                    value={formData.googleAdsScript}
+                    onChange={(e) => setFormData(prev => ({ ...prev, googleAdsScript: e.target.value }))}
+                    rows={6}
+                  />
+                  <p className="text-sm text-gray-500 mt-1">Optional: This script will be added to the &lt;head&gt; of your generated website</p>
                 </div>
               </CardContent>
             </Card>
