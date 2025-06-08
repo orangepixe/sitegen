@@ -7,10 +7,13 @@ export interface Project {
   productTitle: string;
   shortDescription: string;
   fullDescription: string;
-  price: number;
+  price: string;
   buyButtonText: string;
   mainWebsiteUrl: string;
   googleAdsScript?: string;
+  googleTagId?: string;
+  googleConversionId?: string;
+  googleConversionLabel?: string;
   template: 'modern' | 'classic';
   extraFields?: Record<string, any>;
   createdAt: string;

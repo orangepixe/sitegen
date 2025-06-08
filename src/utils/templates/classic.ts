@@ -4,6 +4,18 @@ import { Project } from '@/types/project';
 export const generateClassicTemplate = (project: Project): string => {
   const trackingScript = project.googleAdsScript ? project.googleAdsScript : '';
   
+  // Generate Google Analytics script if Google Tag ID is provided
+  const googleAnalyticsScript = project.googleTagId ? `
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=${project.googleTagId}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '${project.googleTagId}');
+    </script>
+  ` : '';
+  
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +30,7 @@ export const generateClassicTemplate = (project: Project): string => {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    ${googleAnalyticsScript}
     ${trackingScript}
 </head>
 <body>
@@ -222,16 +235,26 @@ export const generateClassicTemplate = (project: Project): string => {
 
     <script>
         function trackAndRedirect() {
-            if (typeof gtag !== 'undefined') {
+            // Track the conversion with Google Analytics if available
+            if (typeof gtag !== 'undefined' && '${project.googleTagId}') {
                 gtag('event', 'conversion', {
-                    'send_to': 'AW-CONVERSION_ID/label',
+                    'send_to': '${project.googleTagId}',
+                });
+            }
+            
+            // Track Google Ads conversion if configured
+            if (typeof gtag !== 'undefined' && '${project.googleConversionId}' && '${project.googleConversionLabel}') {
+                gtag('event', 'conversion', {
+                    'send_to': '${project.googleConversionId}/${project.googleConversionLabel}',
                     'event_callback': function() {
                         window.location.href = '${project.mainWebsiteUrl}';
                     }
                 });
-            } else {
-                window.location.href = '${project.mainWebsiteUrl}';
+                return; // Don't redirect immediately if we have a callback
             }
+            
+            // Default redirect if no conversion tracking or as fallback
+            window.location.href = '${project.mainWebsiteUrl}';
         }
 
         function redirectToMain() {
