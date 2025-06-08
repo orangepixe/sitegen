@@ -140,7 +140,9 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
         onKeyDown={handleKeyDown}
         className={cn(
           "min-h-[200px] p-3 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-          "prose prose-sm max-w-none [&_*]:my-1"
+          "prose prose-sm max-w-none [&_*]:my-1",
+          // Placeholder styling using CSS classes
+          "empty:before:content-[attr(data-placeholder)] empty:before:text-muted-foreground empty:before:italic"
         )}
         style={{ 
           whiteSpace: 'pre-wrap',
@@ -150,14 +152,6 @@ const RichTextEditor: React.FC<RichTextEditorProps> = ({
         suppressContentEditableWarning={true}
         id={id}
       />
-      
-      <style jsx>{`
-        [contenteditable]:empty:before {
-          content: attr(data-placeholder);
-          color: #9ca3af;
-          font-style: italic;
-        }
-      `}</style>
     </div>
   );
 };
