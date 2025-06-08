@@ -14,7 +14,7 @@ export const generateClassicTemplate = (project: Project): string => {
     <meta property="og:title" content="${project.productTitle}">
     <meta property="og:description" content="${project.shortDescription}">
     <meta property="og:image" content="${project.productPhotos[0] || ''}">
-    <meta property="og:type" content="product">
+    <meta property="og:type" content="website">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -40,7 +40,7 @@ export const generateClassicTemplate = (project: Project): string => {
                         <a class="nav-link" href="#" onclick="redirectToMain()">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="redirectToMain()">Products</a>
+                        <a class="nav-link" href="#" onclick="redirectToMain()">Services</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="redirectToMain()">Contact</a>
@@ -76,10 +76,10 @@ export const generateClassicTemplate = (project: Project): string => {
         </div>
     </div>
 
-    <!-- Features Section -->
+    <!-- Key Features Section -->
     <section class="py-5 bg-light">
         <div class="container">
-            <h2 class="text-center mb-5">Why Choose ${project.productTitle}?</h2>
+            <h2 class="text-center mb-5">Key Features</h2>
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <div class="card h-100 text-center border-0 shadow-sm">
@@ -88,7 +88,7 @@ export const generateClassicTemplate = (project: Project): string => {
                                 <i class="fas fa-star fa-3x"></i>
                             </div>
                             <h5 class="card-title">Premium Quality</h5>
-                            <p class="card-text">High-quality materials and craftsmanship ensure lasting value and satisfaction.</p>
+                            <p class="card-text">High-quality materials and exceptional standards ensure lasting value and satisfaction.</p>
                         </div>
                     </div>
                 </div>
@@ -98,8 +98,8 @@ export const generateClassicTemplate = (project: Project): string => {
                             <div class="text-success mb-3">
                                 <i class="fas fa-shipping-fast fa-3x"></i>
                             </div>
-                            <h5 class="card-title">Fast Delivery</h5>
-                            <p class="card-text">Quick and reliable shipping to get your order to you as fast as possible.</p>
+                            <h5 class="card-title">Quick Response</h5>
+                            <p class="card-text">Fast and reliable service to get you what you need as quickly as possible.</p>
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@ export const generateClassicTemplate = (project: Project): string => {
                                 <i class="fas fa-heart fa-3x"></i>
                             </div>
                             <h5 class="card-title">100% Satisfaction</h5>
-                            <p class="card-text">Money-back guarantee if you're not completely satisfied with your purchase.</p>
+                            <p class="card-text">Full satisfaction guarantee if you're not completely happy with your experience.</p>
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@ export const generateClassicTemplate = (project: Project): string => {
         </div>
     </section>
 
-    <!-- Product Gallery -->
+    <!-- Image Gallery -->
     ${project.productPhotos.length > 0 ? `
     <section class="py-5">
         <div class="container">
@@ -142,7 +142,7 @@ export const generateClassicTemplate = (project: Project): string => {
     </section>
     ` : ''}
 
-    <!-- Product Description -->
+    <!-- Detailed Description -->
     <section class="py-5 bg-light">
         <div class="container">
             <div class="row">
@@ -165,8 +165,8 @@ export const generateClassicTemplate = (project: Project): string => {
         <div class="container text-center">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <h2 class="display-5 mb-4">Ready to Order?</h2>
-                    <p class="lead mb-4">Join thousands of satisfied customers who love ${project.productTitle}</p>
+                    <h2 class="display-5 mb-4">Ready to Get Started?</h2>
+                    <p class="lead mb-4">Join thousands of satisfied customers who chose ${project.productTitle}</p>
                     <div class="mb-4">
                         <span class="h1 fw-bold text-warning">${project.price}</span>
                     </div>
@@ -184,14 +184,14 @@ export const generateClassicTemplate = (project: Project): string => {
             <div class="row">
                 <div class="col-lg-3 mb-4">
                     <h5>${project.websiteName}</h5>
-                    <p class="text-muted">Your trusted partner for quality products and exceptional service.</p>
+                    <p class="text-muted">Your trusted partner for quality services and exceptional experience.</p>
                 </div>
                 <div class="col-lg-3 mb-4">
                     <h5>Quick Links</h5>
                     <ul class="list-unstyled">
                         <li><a href="#" onclick="redirectToMain()" class="text-muted text-decoration-none">Home</a></li>
                         <li><a href="#" onclick="redirectToMain()" class="text-muted text-decoration-none">About</a></li>
-                        <li><a href="#" onclick="redirectToMain()" class="text-muted text-decoration-none">Products</a></li>
+                        <li><a href="#" onclick="redirectToMain()" class="text-muted text-decoration-none">Services</a></li>
                         <li><a href="#" onclick="redirectToMain()" class="text-muted text-decoration-none">Contact</a></li>
                     </ul>
                 </div>
@@ -199,8 +199,8 @@ export const generateClassicTemplate = (project: Project): string => {
                     <h5>Support</h5>
                     <ul class="list-unstyled">
                         <li><a href="#" onclick="redirectToMain()" class="text-muted text-decoration-none">FAQ</a></li>
-                        <li><a href="#" onclick="redirectToMain()" class="text-muted text-decoration-none">Shipping Info</a></li>
-                        <li><a href="#" onclick="redirectToMain()" class="text-muted text-decoration-none">Returns</a></li>
+                        <li><a href="#" onclick="redirectToMain()" class="text-muted text-decoration-none">Information</a></li>
+                        <li><a href="#" onclick="redirectToMain()" class="text-muted text-decoration-none">Policies</a></li>
                         <li><a href="#" onclick="redirectToMain()" class="text-muted text-decoration-none">Contact Us</a></li>
                     </ul>
                 </div>
