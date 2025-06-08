@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
+import { RichTextEditor } from '@/components/ui/rich-text-editor';
 import { Project } from '@/types/project';
 
 interface ProductContentSectionProps {
@@ -18,14 +18,16 @@ const ProductContentSection: React.FC<ProductContentSectionProps> = ({ formData,
         <CardContent className="space-y-4 py-3">
           <div>
             <Label htmlFor="fullDescription">Full HTML Description</Label>
-            <Textarea
+            <RichTextEditor
               id="fullDescription"
-              placeholder="Enter detailed product description with HTML formatting"
-              value={formData.fullDescription}
-              onChange={(e) => onUpdate({ fullDescription: e.target.value })}
-              rows={8}
-              required
+              placeholder="Enter detailed description with rich formatting..."
+              value={formData.fullDescription || ''}
+              onChange={(value) => onUpdate({ fullDescription: value })}
+              className="mt-2"
             />
+            <p className="text-sm text-muted-foreground mt-1">
+              Use the toolbar to format your text. HTML formatting will be preserved in the generated website.
+            </p>
           </div>
         </CardContent>
       </Card>
