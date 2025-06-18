@@ -111,7 +111,60 @@ export const generateModernTemplate = (project: Project): string => {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${project.websiteName}</title>
+    <title>${project.productTitle} - ${project.websiteName}</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="${project.shortDescription}">
+    <meta name="keywords" content="${project.productTitle}, ${project.websiteName}">
+    <meta name="author" content="${project.websiteName}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="${mainWebsiteUrl}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="${mainWebsiteUrl}">
+    <meta property="og:title" content="${project.productTitle} - ${project.websiteName}">
+    <meta property="og:description" content="${project.shortDescription}">
+    <meta property="og:site_name" content="${project.websiteName}">
+    ${project.productPhotos.length > 0 ? `<meta property="og:image" content="${project.productPhotos[0]}">` : ''}
+    ${project.productPhotos.length > 0 ? `<meta property="og:image:alt" content="${project.productTitle}">` : ''}
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="${mainWebsiteUrl}">
+    <meta property="twitter:title" content="${project.productTitle} - ${project.websiteName}">
+    <meta property="twitter:description" content="${project.shortDescription}">
+    ${project.productPhotos.length > 0 ? `<meta property="twitter:image" content="${project.productPhotos[0]}">` : ''}
+    
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="${project.websiteName}">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "${project.productTitle}",
+      "description": "${project.shortDescription}",
+      "brand": {
+        "@type": "Brand",
+        "name": "${project.websiteName}"
+      },
+      "url": "${mainWebsiteUrl}",
+      ${project.productPhotos.length > 0 ? `"image": "${project.productPhotos[0]}",` : ''}
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "${project.price.replace(/[^0-9.]/g, '')}",
+        "availability": "https://schema.org/InStock",
+        "url": "${mainWebsiteUrl}"
+      }
+    }
+    </script>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     ${googleTagId ? `
     <!-- Google tag (gtag.js) -->

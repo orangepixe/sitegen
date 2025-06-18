@@ -111,7 +111,60 @@ export const generateClassicTemplate = (project: Project): string => {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${project.websiteName}</title>
+    <title>${project.productTitle} - ${project.websiteName}</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="${project.shortDescription}">
+    <meta name="keywords" content="${project.productTitle}, ${project.websiteName}">
+    <meta name="author" content="${project.websiteName}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="${mainWebsiteUrl}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="${mainWebsiteUrl}">
+    <meta property="og:title" content="${project.productTitle} - ${project.websiteName}">
+    <meta property="og:description" content="${project.shortDescription}">
+    <meta property="og:site_name" content="${project.websiteName}">
+    ${project.productPhotos.length > 0 ? `<meta property="og:image" content="${project.productPhotos[0]}">` : ''}
+    ${project.productPhotos.length > 0 ? `<meta property="og:image:alt" content="${project.productTitle}">` : ''}
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="${mainWebsiteUrl}">
+    <meta property="twitter:title" content="${project.productTitle} - ${project.websiteName}">
+    <meta property="twitter:description" content="${project.shortDescription}">
+    ${project.productPhotos.length > 0 ? `<meta property="twitter:image" content="${project.productPhotos[0]}">` : ''}
+    
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#007bff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="${project.websiteName}">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "${project.productTitle}",
+      "description": "${project.shortDescription}",
+      "brand": {
+        "@type": "Brand",
+        "name": "${project.websiteName}"
+      },
+      "url": "${mainWebsiteUrl}",
+      ${project.productPhotos.length > 0 ? `"image": "${project.productPhotos[0]}",` : ''}
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "USD",
+        "price": "${project.price.replace(/[^0-9.]/g, '')}",
+        "availability": "https://schema.org/InStock",
+        "url": "${mainWebsiteUrl}"
+      }
+    }
+    </script>
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     ${googleTagId ? `
