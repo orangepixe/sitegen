@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Project } from '@/types/project';
 
 interface PricingSectionProps {
@@ -44,6 +45,19 @@ const PricingSection: React.FC<PricingSectionProps> = ({ formData, onUpdate }) =
           <div className="border-t pt-4">
             <h3 className="text-md font-medium mb-3">Google Analytics & Conversion Tracking</h3>
             <div className="space-y-4">
+              <div>
+                <Label htmlFor="googleAdsScript">Google Ads Script/Tag</Label>
+                <Textarea
+                  id="googleAdsScript"
+                  placeholder="Paste your Google Ads conversion tracking script here (e.g., Global Site Tag or conversion tracking script)"
+                  value={formData.googleAdsScript || ''}
+                  onChange={(e) => onUpdate({ googleAdsScript: e.target.value })}
+                  rows={4}
+                />
+                <p className="text-sm text-muted-foreground mt-1">
+                  Paste the complete Google Ads tracking script that will be injected into the page head
+                </p>
+              </div>
               <div>
                 <Label htmlFor="googleTagId">Google Tag ID (GA4)</Label>
                 <Input

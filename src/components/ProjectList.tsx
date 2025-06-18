@@ -41,7 +41,7 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, onEdit, onDelete, o
             <p className="text-sm text-gray-700">{project.shortDescription}</p>
             
             <div className="flex items-center justify-between">
-              <span className="font-semibold text-lg text-green-600">${project.price}</span>
+              <span className="font-semibold text-lg text-green-600">{project.price}</span>
               <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
                 {project.productPhotos.length} photo{project.productPhotos.length !== 1 ? 's' : ''}
               </span>
