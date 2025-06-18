@@ -10,7 +10,7 @@ interface ProjectListProps {
   projects: Project[];
   onEdit: (project: Project) => void;
   onDelete: (id: string) => void;
-  onGenerate: (project: Project) => void;
+  onGenerate: (project: Project, template: 'modern' | 'classic') => void;
 }
 
 const ProjectList: React.FC<ProjectListProps> = ({ projects, onEdit, onDelete, onGenerate }) => {
@@ -66,8 +66,11 @@ const ProjectList: React.FC<ProjectListProps> = ({ projects, onEdit, onDelete, o
               <Button size="sm" onClick={() => onEdit(project)} className="flex-1">
                 Edit
               </Button>
-              <Button size="sm" variant="outline" onClick={() => onGenerate(project)} className="flex-1">
-                Generate
+              <Button size="sm" variant="outline" onClick={() => onGenerate(project, 'modern')} className="flex-1">
+                Modern
+              </Button>
+              <Button size="sm" variant="outline" onClick={() => onGenerate(project, 'classic')} className="flex-1">
+                Classic
               </Button>
               <Button size="sm" variant="destructive" onClick={() => onDelete(project.id)}>
                 Delete

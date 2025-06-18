@@ -50,14 +50,16 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
     setCurrentView('edit');
   };
 
-  const handleGenerateHTML = (project: Project) => {
+  const handleGenerateHTML = (project: Project, template: 'modern' | 'classic') => {
     try {
-      const html = generateHTML(project);
+      // Create a copy of the project with the selected template
+      const projectWithTemplate = { ...project, template };
+      const html = generateHTML(projectWithTemplate);
       const blob = new Blob([html], { type: 'text/html' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${project.websiteName.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_index.html`;
+      a.download = `${project.websiteName.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_${template}_index.html`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -65,7 +67,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
       
       toast({
         title: 'Success',
-        description: 'HTML file generated and downloaded!',
+        description: `${template} HTML file generated and downloaded!`,
       });
     } catch (error) {
       toast({

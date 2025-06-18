@@ -9,7 +9,6 @@ import ProductContentSection from './ProjectForm/ProductContentSection';
 import ImagesSection from './ProjectForm/ImagesSection';
 import PricingSection from './ProjectForm/PricingSection';
 import LinksSection from './ProjectForm/LinksSection';
-import TemplateSection from './ProjectForm/TemplateSection';
 
 interface ProjectFormProps {
   project?: Project;
@@ -119,7 +118,6 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
         <ImagesSection formData={formData} onUpdate={updateFormData} />
         <PricingSection formData={formData} onUpdate={updateFormData} />
         <LinksSection formData={formData} onUpdate={updateFormData} />
-        <TemplateSection formData={formData} onUpdate={updateFormData} />
 
         <div className="flex gap-2 pt-4">
           <Button type="submit">{project ? 'Update' : 'Create'} Project</Button>
