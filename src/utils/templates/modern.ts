@@ -8,24 +8,100 @@ export const generateModernTemplate = (project: Project): string => {
   const googleConversionLabel = project.googleConversionLabel || '';
   const mainWebsiteUrl = project.mainWebsiteUrl || '#';
 
-  // Generate tracking script
+  // Generate enhanced tracking script with console logging and loader
   const trackingScript = `
+    <style>
+      #fullscreen-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        color: white;
+      }
+      
+      .loader-spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(255,255,255,0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+        margin-bottom: 20px;
+      }
+      
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+      
+      .loader-text {
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+      }
+    </style>
+    
+    <div id="fullscreen-loader">
+      <div class="loader-spinner"></div>
+      <div class="loader-text">Loading...</div>
+    </div>
+
     <script>
+      function showLoader() {
+        console.log('🔄 Showing fullscreen loader');
+        document.getElementById('fullscreen-loader').style.display = 'flex';
+      }
+      
+      function hideLoader() {
+        console.log('✅ Hiding fullscreen loader');
+        document.getElementById('fullscreen-loader').style.display = 'none';
+      }
+
       function trackAndRedirect() {
+        console.log('🎯 Track and redirect button clicked');
+        console.log('📊 Conversion ID:', '${googleConversionId}');
+        console.log('🏷️ Conversion Label:', '${googleConversionLabel}');
+        console.log('🌐 Redirect URL:', '${mainWebsiteUrl}');
+        
+        showLoader();
+        
         if (typeof gtag !== 'undefined' && '${googleConversionId}' && '${googleConversionLabel}') {
+          console.log('📈 Firing Google Ads conversion tracking...');
           gtag('event', 'conversion', {
             'send_to': '${googleConversionId}/${googleConversionLabel}',
             'event_callback': function() {
-              window.location.href = '${mainWebsiteUrl}';
+              console.log('✅ Conversion tracking fired successfully');
+              setTimeout(() => {
+                console.log('🚀 Redirecting after 3 seconds...');
+                window.location.href = '${mainWebsiteUrl}';
+              }, 3000);
             }
           });
         } else {
-          window.location.href = '${mainWebsiteUrl}';
+          console.log('⚠️ Google Analytics not loaded or conversion data missing, redirecting without tracking');
+          setTimeout(() => {
+            console.log('🚀 Redirecting after 3 seconds...');
+            window.location.href = '${mainWebsiteUrl}';
+          }, 3000);
         }
       }
 
       function redirectToMain() {
-        window.location.href = '${mainWebsiteUrl}';
+        console.log('🔗 Navigation link clicked');
+        console.log('🌐 Redirect URL:', '${mainWebsiteUrl}');
+        
+        showLoader();
+        
+        setTimeout(() => {
+          console.log('🚀 Redirecting after 3 seconds...');
+          window.location.href = '${mainWebsiteUrl}';
+        }, 3000);
       }
     </script>
   `;
@@ -45,6 +121,7 @@ export const generateModernTemplate = (project: Project): string => {
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', '${googleTagId}');
+      console.log('📊 Google Analytics initialized with ID: ${googleTagId}');
     </script>
     ` : ''}
     ${googleAdsScript}

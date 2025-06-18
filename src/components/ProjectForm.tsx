@@ -65,6 +65,32 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
     setFormData(prev => ({ ...prev, ...updates }));
   };
 
+  const fillDemoContent = () => {
+    const demoData: Partial<Project> = {
+      websiteName: 'TechStart Solutions',
+      productTitle: 'Professional Web Development Services',
+      shortDescription: 'Transform your business with custom web applications that drive results and engage your customers.',
+      fullDescription: '<h2>Why Choose Our Web Development Services?</h2><p>We specialize in creating modern, responsive websites that help your business grow. Our team combines cutting-edge technology with proven design principles to deliver exceptional results.</p><h3>What We Offer:</h3><ul><li>Custom Web Application Development</li><li>Responsive Design for All Devices</li><li>E-commerce Solutions</li><li>SEO Optimization</li><li>Ongoing Support & Maintenance</li></ul><p>Contact us today to discuss your project and get a free consultation!</p>',
+      price: 'Starting at $2,999',
+      buyButtonText: 'Get Free Quote',
+      mainWebsiteUrl: 'https://techstartsolutions.com',
+      googleAdsScript: `<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EXAMPLE123"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EXAMPLE123');
+</script>`,
+      googleTagId: 'G-EXAMPLE123',
+      googleConversionId: 'AW-123456789',
+      googleConversionLabel: 'conversion-label-123',
+      template: 'modern'
+    };
+    
+    setFormData(prev => ({ ...prev, ...demoData }));
+  };
+
   return (
     <div className="w-full mx-auto space-y-6">
       <Card>
@@ -73,7 +99,17 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
             <span className="text-2xl font-semibold text-gray-800">
               {project ? 'Edit Project' : 'Add New Project'}
             </span>
-            <a className="text-sm cursor-pointer text-gray-500" onClick={onCancel}>Back</a>
+            <div className="flex gap-2">
+              <Button 
+                type="button" 
+                variant="outline" 
+                onClick={fillDemoContent}
+                className="text-sm"
+              >
+                Fill Demo Content
+              </Button>
+              <a className="text-sm cursor-pointer text-gray-500" onClick={onCancel}>Back</a>
+            </div>
           </CardTitle>
         </CardHeader>
       </Card>
