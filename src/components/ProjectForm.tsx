@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Project } from '@/types/project';
-import { useNavigate } from "react-router-dom";
+
 import BasicInfoSection from './ProjectForm/BasicInfoSection';
 import ProductContentSection from './ProjectForm/ProductContentSection';
 import ImagesSection from './ProjectForm/ImagesSection';
