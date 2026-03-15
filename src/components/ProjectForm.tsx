@@ -41,7 +41,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const projectData: Project = {
-      id: project?.id || Date.now().toString(),
+      id: project?.id || crypto.randomUUID(),
       websiteName: formData.websiteName || '',
       productTitle: formData.productTitle || '',
       shortDescription: formData.shortDescription || '',
@@ -53,6 +53,8 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
       googleTagId: formData.googleTagId || '',
       googleConversionId: formData.googleConversionId || '',
       googleConversionLabel: formData.googleConversionLabel || '',
+      conversionValue: formData.conversionValue || '1.0',
+      conversionCurrency: formData.conversionCurrency || 'AUD',
       template: formData.template as 'modern' | 'classic' || 'modern',
       productPhotos: formData.productPhotos || [],
       logo: formData.logo,
