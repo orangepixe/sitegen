@@ -6,6 +6,8 @@ export const generateModernTemplate = (project: Project): string => {
   const googleTagId = project.googleTagId || '';
   const googleConversionId = project.googleConversionId || '';
   const googleConversionLabel = project.googleConversionLabel || '';
+  const conversionValue = project.conversionValue || '1.0';
+  const conversionCurrency = project.conversionCurrency || 'AUD';
   const mainWebsiteUrl = project.mainWebsiteUrl || '#';
 
   // Generate enhanced tracking script with console logging and loader
