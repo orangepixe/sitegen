@@ -14,6 +14,8 @@ export interface Project {
   googleTagId?: string;
   googleConversionId?: string;
   googleConversionLabel?: string;
+  conversionValue?: string;
+  conversionCurrency?: string;
   template: 'modern' | 'classic';
   extraFields?: Record<string, any>;
   createdAt: string;

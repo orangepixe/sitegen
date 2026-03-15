@@ -94,6 +94,30 @@ const PricingSection: React.FC<PricingSectionProps> = ({ formData, onUpdate }) =
                   The conversion label from your Google Ads conversion action
                 </p>
               </div>
+              <div>
+                <Label htmlFor="conversionValue">Conversion Value</Label>
+                <Input
+                  id="conversionValue"
+                  placeholder="e.g., 1.0"
+                  value={formData.conversionValue || '1.0'}
+                  onChange={(e) => onUpdate({ conversionValue: e.target.value })}
+                />
+                <p className="text-sm text-muted-foreground mt-1">
+                  The monetary value assigned to the conversion event
+                </p>
+              </div>
+              <div>
+                <Label htmlFor="conversionCurrency">Conversion Currency</Label>
+                <Input
+                  id="conversionCurrency"
+                  placeholder="e.g., AUD, USD, EUR"
+                  value={formData.conversionCurrency || 'AUD'}
+                  onChange={(e) => onUpdate({ conversionCurrency: e.target.value })}
+                />
+                <p className="text-sm text-muted-foreground mt-1">
+                  The currency code for the conversion value (e.g., AUD, USD, EUR)
+                </p>
+              </div>
             </div>
           </div>
         </CardContent>

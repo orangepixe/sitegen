@@ -5,7 +5,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Project } from '@/types/project';
 import { loadProjects, saveProject, deleteProject as removeProject } from '@/utils/storage';
 import { generateHTML } from '@/utils/templates';
-import { logout } from '@/utils/auth';
+import { supabase } from '@/integrations/supabase/client';
 import ProjectForm from './ProjectForm';
 import ProjectList from './ProjectList';
 
@@ -17,31 +17,41 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [currentView, setCurrentView] = useState<'list' | 'add' | 'edit'>('list');
   const [editingProject, setEditingProject] = useState<Project | undefined>();
+  const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
-  useEffect(() => {
-    setProjects(loadProjects());
-  }, []);
-
-  const handleSaveProject = (project: Project) => {
-    saveProject(project);
-    setProjects(loadProjects());
-    setCurrentView('list');
-    setEditingProject(undefined);
-    toast({
-      title: 'Success',
-      description: 'Project saved successfully!',
-    });
+  const fetchProjects = async () => {
+    setLoading(true);
+    const data = await loadProjects();
+    setProjects(data);
+    setLoading(false);
   };
 
-  const handleDeleteProject = (id: string) => {
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
+  const handleSaveProject = async (project: Project) => {
+    try {
+      await saveProject(project);
+      await fetchProjects();
+      setCurrentView('list');
+      setEditingProject(undefined);
+      toast({ title: 'Success', description: 'Project saved successfully!' });
+    } catch (error) {
+      toast({ title: 'Error', description: 'Failed to save project.', variant: 'destructive' });
+    }
+  };
+
+  const handleDeleteProject = async (id: string) => {
     if (confirm('Are you sure you want to delete this project?')) {
-      removeProject(id);
-      setProjects(loadProjects());
-      toast({
-        title: 'Success',
-        description: 'Project deleted successfully!',
-      });
+      try {
+        await removeProject(id);
+        await fetchProjects();
+        toast({ title: 'Success', description: 'Project deleted successfully!' });
+      } catch (error) {
+        toast({ title: 'Error', description: 'Failed to delete project.', variant: 'destructive' });
+      }
     }
   };
 
@@ -52,7 +62,6 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
 
   const handleGenerateHTML = (project: Project, template: 'modern' | 'classic') => {
     try {
-      // Create a copy of the project with the selected template
       const projectWithTemplate = { ...project, template };
       const html = generateHTML(projectWithTemplate);
       const blob = new Blob([html], { type: 'text/html' });
@@ -64,22 +73,14 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      
-      toast({
-        title: 'Success',
-        description: `${template} HTML file generated and downloaded!`,
-      });
+      toast({ title: 'Success', description: `${template} HTML file generated and downloaded!` });
     } catch (error) {
-      toast({
-        title: 'Error',
-        description: 'Failed to generate HTML file.',
-        variant: 'destructive',
-      });
+      toast({ title: 'Error', description: 'Failed to generate HTML file.', variant: 'destructive' });
     }
   };
 
-  const handleLogout = () => {
-    logout();
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
     onLogout();
   };
 
@@ -104,7 +105,11 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
               </Button>
             </div>
             
-            {projects.length === 0 ? (
+            {loading ? (
+              <div className="text-center py-12">
+                <p className="text-gray-500">Loading projects...</p>
+              </div>
+            ) : projects.length === 0 ? (
               <div className="text-center py-12">
                 <p className="text-gray-500 mb-4">No projects found</p>
                 <Button onClick={() => setCurrentView('add')}>

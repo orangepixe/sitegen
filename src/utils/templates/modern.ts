@@ -6,6 +6,8 @@ export const generateModernTemplate = (project: Project): string => {
   const googleTagId = project.googleTagId || '';
   const googleConversionId = project.googleConversionId || '';
   const googleConversionLabel = project.googleConversionLabel || '';
+  const conversionValue = project.conversionValue || '1.0';
+  const conversionCurrency = project.conversionCurrency || 'AUD';
   const mainWebsiteUrl = project.mainWebsiteUrl || '#';
 
   // Generate enhanced tracking script with console logging and loader
@@ -103,6 +105,22 @@ export const generateModernTemplate = (project: Project): string => {
           window.location.href = '${mainWebsiteUrl}';
         }, 3000);
       }
+
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof(url) != 'undefined') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'conversion', {
+          'send_to': '${googleConversionId}/${googleConversionLabel}',
+          'value': ${conversionValue},
+          'currency': '${conversionCurrency}',
+          'transaction_id': '',
+          'event_callback': callback
+        });
+        return false;
+      }
     </script>
   `;
 
@@ -157,7 +175,7 @@ export const generateModernTemplate = (project: Project): string => {
       ${project.productPhotos.length > 0 ? `"image": "${project.productPhotos[0]}",` : ''}
       "offers": {
         "@type": "Offer",
-        "priceCurrency": "USD",
+        "priceCurrency": "${conversionCurrency}",
         "price": "${project.price.replace(/[^0-9.]/g, '')}",
         "availability": "https://schema.org/InStock",
         "url": "${mainWebsiteUrl}"

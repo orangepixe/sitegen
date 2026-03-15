@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Project } from '@/types/project';
-import { useNavigate } from "react-router-dom";
+
 import BasicInfoSection from './ProjectForm/BasicInfoSection';
 import ProductContentSection from './ProjectForm/ProductContentSection';
 import ImagesSection from './ProjectForm/ImagesSection';
@@ -29,17 +29,19 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
     googleTagId: '',
     googleConversionId: '',
     googleConversionLabel: '',
+    conversionValue: '1.0',
+    conversionCurrency: 'AUD',
     template: 'modern',
     productPhotos: [],
     ...project,
   });
 
-  const nav = useNavigate();
+  
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const projectData: Project = {
-      id: project?.id || Date.now().toString(),
+      id: project?.id || crypto.randomUUID(),
       websiteName: formData.websiteName || '',
       productTitle: formData.productTitle || '',
       shortDescription: formData.shortDescription || '',
@@ -51,6 +53,8 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
       googleTagId: formData.googleTagId || '',
       googleConversionId: formData.googleConversionId || '',
       googleConversionLabel: formData.googleConversionLabel || '',
+      conversionValue: formData.conversionValue || '1.0',
+      conversionCurrency: formData.conversionCurrency || 'AUD',
       template: formData.template as 'modern' | 'classic' || 'modern',
       productPhotos: formData.productPhotos || [],
       logo: formData.logo,
