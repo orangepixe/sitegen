@@ -20,7 +20,7 @@ const rowToProject = (row: any): Project => ({
   googleConversionLabel: row.google_conversion_label || undefined,
   conversionValue: row.conversion_value || '1.0',
   conversionCurrency: row.conversion_currency || 'AUD',
-  template: row.template as 'modern' | 'classic',
+  template: row.template as Project['template'],
   extraFields: row.extra_fields || undefined,
   createdAt: row.created_at,
   updatedAt: row.updated_at,

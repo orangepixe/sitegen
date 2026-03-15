@@ -16,7 +16,7 @@ export interface Project {
   googleConversionLabel?: string;
   conversionValue?: string;
   conversionCurrency?: string;
-  template: 'modern' | 'classic';
+  template: 'modern' | 'classic' | 'minimal' | 'editorial' | 'realestate' | 'heavyequipment';
   extraFields?: Record<string, any>;
   createdAt: string;
   updatedAt: string;

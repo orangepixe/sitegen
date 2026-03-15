@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { isAuthenticated } from '@/utils/auth';
+import { supabase } from '@/integrations/supabase/client';
 import LoginForm from '@/components/LoginForm';
 import AdminDashboard from '@/components/AdminDashboard';
 
@@ -9,8 +9,16 @@ const Index = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setAuthenticated(isAuthenticated());
-    setLoading(false);
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setAuthenticated(!!session);
+      setLoading(false);
+    });
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setAuthenticated(!!session);
+    });
+    return () => subscription.unsubscribe();
   }, []);
 
   if (loading) {

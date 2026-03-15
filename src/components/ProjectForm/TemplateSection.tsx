@@ -20,7 +20,7 @@ const TemplateSection: React.FC<TemplateSectionProps> = ({ formData, onUpdate })
       <CardContent>
         <RadioGroup
           value={formData.template}
-          onValueChange={(value) => onUpdate({ template: value as 'modern' | 'classic' })}
+          onValueChange={(value) => onUpdate({ template: value as Project['template'] })}
         >
           {templates.map((template) => (
             <div key={template.id} className="flex items-center space-x-2">

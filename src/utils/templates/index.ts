@@ -2,6 +2,10 @@
 import { Project, Template } from '@/types/project';
 import { generateModernTemplate } from './modern';
 import { generateClassicTemplate } from './classic';
+import { generateMinimalTemplate } from './minimal';
+import { generateEditorialTemplate } from './editorial';
+import { generateRealestateTemplate } from './realestate';
+import { generateHeavyequipmentTemplate } from './heavyequipment';
 
 export const templates: Template[] = [
   {
@@ -15,6 +19,30 @@ export const templates: Template[] = [
     name: 'Classic (Bootstrap)',
     preview: 'Classic design with Bootstrap styling, cards, carousel, and professional layout',
     generate: generateClassicTemplate,
+  },
+  {
+    id: 'minimal',
+    name: 'Minimal',
+    preview: 'Clean, typography-focused layout with plenty of white space and simple structure',
+    generate: generateMinimalTemplate,
+  },
+  {
+    id: 'editorial',
+    name: 'Editorial',
+    preview: 'Magazine-style with serif headings, strong type hierarchy, and dark accents',
+    generate: generateEditorialTemplate,
+  },
+  {
+    id: 'realestate',
+    name: 'Real Estate',
+    preview: 'Property-focused layout with hero image, price highlight, and listing-style details',
+    generate: generateRealestateTemplate,
+  },
+  {
+    id: 'heavyequipment',
+    name: 'Heavy Equipment',
+    preview: 'Industrial look for construction and heavy equipment with bold type and orange accents',
+    generate: generateHeavyequipmentTemplate,
   },
 ];
 

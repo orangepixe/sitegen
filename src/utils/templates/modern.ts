@@ -10,7 +10,33 @@ export const generateModernTemplate = (project: Project): string => {
   const conversionCurrency = project.conversionCurrency || 'AUD';
   const mainWebsiteUrl = project.mainWebsiteUrl || '#';
 
-  // Generate enhanced tracking script with console logging and loader
+  // 1) Base Google tag: only one source — either generated from GA4 ID or user-pasted script (no duplicate)
+  const baseGtagBlock = googleTagId
+    ? `
+    <!-- Google tag (gtag.js) - GA4 + Google Ads so conversions are tracked and spend is optimized -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=${googleTagId}"><\/script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '${googleTagId}');
+      ${googleConversionId ? `gtag('config', '${googleConversionId}');` : ''}
+    <\/script>`
+    : googleAdsScript.trim()
+      ? `\n    <!-- Google Ads / gtag (pasted) -->\n    ${googleAdsScript.trim()}`
+      : googleConversionId
+        ? `
+    <!-- Google tag (gtag.js) - Google Ads only (no GA4) for conversion tracking -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=${googleConversionId}"><\/script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '${googleConversionId}');
+    <\/script>`
+        : '';
+
+  // 2) Loader + redirect/tracking behavior (no conversion helper here)
   const trackingScript = `
     <style>
       #fullscreen-loader {
@@ -27,7 +53,6 @@ export const generateModernTemplate = (project: Project): string => {
         z-index: 9999;
         color: white;
       }
-      
       .loader-spinner {
         width: 50px;
         height: 50px;
@@ -37,78 +62,57 @@ export const generateModernTemplate = (project: Project): string => {
         animation: spin 1s ease-in-out infinite;
         margin-bottom: 20px;
       }
-      
       @keyframes spin {
         to { transform: rotate(360deg); }
       }
-      
       .loader-text {
         font-size: 18px;
         font-weight: 500;
         text-align: center;
       }
     </style>
-    
     <div id="fullscreen-loader">
       <div class="loader-spinner"></div>
       <div class="loader-text">Loading...</div>
     </div>
-
     <script>
       function showLoader() {
-        console.log('🔄 Showing fullscreen loader');
         document.getElementById('fullscreen-loader').style.display = 'flex';
       }
-      
       function hideLoader() {
-        console.log('✅ Hiding fullscreen loader');
         document.getElementById('fullscreen-loader').style.display = 'none';
       }
-
       function trackAndRedirect() {
-        console.log('🎯 Track and redirect button clicked');
-        console.log('📊 Conversion ID:', '${googleConversionId}');
-        console.log('🏷️ Conversion Label:', '${googleConversionLabel}');
-        console.log('🌐 Redirect URL:', '${mainWebsiteUrl}');
-        
         showLoader();
-        
         if (typeof gtag !== 'undefined' && '${googleConversionId}' && '${googleConversionLabel}') {
-          console.log('📈 Firing Google Ads conversion tracking...');
           gtag('event', 'conversion', {
             'send_to': '${googleConversionId}/${googleConversionLabel}',
+            'value': ${conversionValue},
+            'currency': '${conversionCurrency}',
             'event_callback': function() {
-              console.log('✅ Conversion tracking fired successfully');
-              setTimeout(() => {
-                console.log('🚀 Redirecting after 2 seconds...');
-                window.location.href = '${mainWebsiteUrl}';
-              }, 2000);
+              setTimeout(function() { window.location.href = '${mainWebsiteUrl}'; }, 2000);
             }
           });
         } else {
-          console.log('⚠️ Google Analytics not loaded or conversion data missing, redirecting without tracking');
-          setTimeout(() => {
-            console.log('🚀 Redirecting after 2 seconds...');
-            window.location.href = '${mainWebsiteUrl}';
-          }, 2000);
+          setTimeout(function() { window.location.href = '${mainWebsiteUrl}'; }, 2000);
         }
       }
-
       function redirectToMain() {
-        console.log('🔗 Navigation link clicked');
-        console.log('🌐 Redirect URL:', '${mainWebsiteUrl}');
-        
         showLoader();
-        
-        setTimeout(() => {
-          console.log('🚀 Redirecting after 2 seconds...');
-          window.location.href = '${mainWebsiteUrl}';
-        }, 2000);
+        setTimeout(function() { window.location.href = '${mainWebsiteUrl}'; }, 2000);
       }
+    <\/script>
+  `;
 
+  // 3) Second script: gtag_report_conversion (only when conversion ID + label are set)
+  const hasConversion = !!(googleConversionId && googleConversionLabel);
+  const conversionScriptBlock = hasConversion
+    ? `
+    <!-- Google Ads conversion helper (generated from Conversion ID + Label) -->
+    <script>
       function gtag_report_conversion(url) {
         var callback = function () {
-          if (typeof(url) != 'undefined') {
+          if (typeof url !== 'undefined') {
             window.location = url;
           }
         };
@@ -121,8 +125,9 @@ export const generateModernTemplate = (project: Project): string => {
         });
         return false;
       }
-    </script>
-  `;
+    <\/script>
+  `
+    : '';
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -184,19 +189,9 @@ export const generateModernTemplate = (project: Project): string => {
     </script>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    ${googleTagId ? `
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=${googleTagId}"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '${googleTagId}');
-      console.log('📊 Google Analytics initialized with ID: ${googleTagId}');
-    </script>
-    ` : ''}
-    ${googleAdsScript}
+    ${baseGtagBlock}
     ${trackingScript}
+    ${conversionScriptBlock}
 </head>
 <body class="bg-gray-50">
     <!-- Navigation -->

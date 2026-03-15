@@ -39,7 +39,11 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
       setEditingProject(undefined);
       toast({ title: 'Success', description: 'Project saved successfully!' });
     } catch (error) {
-      toast({ title: 'Error', description: 'Failed to save project.', variant: 'destructive' });
+      const message =
+        (error instanceof Error ? error.message : (error as { message?: string })?.message) ||
+        'Failed to save project.';
+      console.error('Save project failed:', error);
+      toast({ title: 'Error', description: message, variant: 'destructive' });
     }
   };
 
@@ -60,7 +64,21 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
     setCurrentView('edit');
   };
 
-  const handleGenerateHTML = (project: Project, template: 'modern' | 'classic') => {
+  const handlePreviewHTML = (project: Project, template: Project['template']) => {
+    try {
+      const projectWithTemplate = { ...project, template };
+      const html = generateHTML(projectWithTemplate);
+      const blob = new Blob([html], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank', 'noopener,noreferrer');
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+      toast({ title: 'Preview', description: `Opening ${template} in new tab.` });
+    } catch (error) {
+      toast({ title: 'Error', description: 'Failed to generate preview.', variant: 'destructive' });
+    }
+  };
+
+  const handleGenerateHTML = (project: Project, template: Project['template']) => {
     try {
       const projectWithTemplate = { ...project, template };
       const html = generateHTML(projectWithTemplate);
@@ -121,6 +139,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ onLogout }) => {
                 projects={projects}
                 onEdit={handleEditProject}
                 onDelete={handleDeleteProject}
+                onPreview={handlePreviewHTML}
                 onGenerate={handleGenerateHTML}
               />
             )}

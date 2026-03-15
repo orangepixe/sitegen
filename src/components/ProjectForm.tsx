@@ -55,7 +55,7 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
       googleConversionLabel: formData.googleConversionLabel || '',
       conversionValue: formData.conversionValue || '1.0',
       conversionCurrency: formData.conversionCurrency || 'AUD',
-      template: formData.template as 'modern' | 'classic' || 'modern',
+      template: (formData.template as Project['template']) || 'modern',
       productPhotos: formData.productPhotos || [],
       logo: formData.logo,
       createdAt: project?.createdAt || new Date().toISOString(),
