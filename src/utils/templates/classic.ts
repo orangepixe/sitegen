@@ -101,9 +101,9 @@ export const generateClassicTemplate = (project: Project): string => {
         showLoader();
         
         setTimeout(() => {
-          console.log('🚀 Redirecting after 3 seconds...');
+          console.log('🚀 Redirecting after 2 seconds...');
           window.location.href = '${mainWebsiteUrl}';
-        }, 3000);
+        }, 2000);
       }
 
       function gtag_report_conversion(url) {
