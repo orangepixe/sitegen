@@ -14,7 +14,78 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      projects: {
+        Row: {
+          buy_button_text: string
+          conversion_currency: string | null
+          conversion_value: string | null
+          created_at: string
+          extra_fields: Json | null
+          full_description: string
+          google_ads_script: string | null
+          google_conversion_id: string | null
+          google_conversion_label: string | null
+          google_tag_id: string | null
+          id: string
+          logo: string | null
+          main_website_url: string
+          price: string
+          product_photos: string[]
+          product_title: string
+          short_description: string
+          template: string
+          updated_at: string
+          user_id: string
+          website_name: string
+        }
+        Insert: {
+          buy_button_text?: string
+          conversion_currency?: string | null
+          conversion_value?: string | null
+          created_at?: string
+          extra_fields?: Json | null
+          full_description?: string
+          google_ads_script?: string | null
+          google_conversion_id?: string | null
+          google_conversion_label?: string | null
+          google_tag_id?: string | null
+          id?: string
+          logo?: string | null
+          main_website_url?: string
+          price?: string
+          product_photos?: string[]
+          product_title?: string
+          short_description?: string
+          template?: string
+          updated_at?: string
+          user_id: string
+          website_name?: string
+        }
+        Update: {
+          buy_button_text?: string
+          conversion_currency?: string | null
+          conversion_value?: string | null
+          created_at?: string
+          extra_fields?: Json | null
+          full_description?: string
+          google_ads_script?: string | null
+          google_conversion_id?: string | null
+          google_conversion_label?: string | null
+          google_tag_id?: string | null
+          id?: string
+          logo?: string | null
+          main_website_url?: string
+          price?: string
+          product_photos?: string[]
+          product_title?: string
+          short_description?: string
+          template?: string
+          updated_at?: string
+          user_id?: string
+          website_name?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
