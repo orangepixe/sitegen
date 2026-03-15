@@ -80,17 +80,17 @@ export const generateClassicTemplate = (project: Project): string => {
             'event_callback': function() {
               console.log('✅ Conversion tracking fired successfully');
               setTimeout(() => {
-                console.log('🚀 Redirecting after 3 seconds...');
+                console.log('🚀 Redirecting after 2 seconds...');
                 window.location.href = '${mainWebsiteUrl}';
-              }, 3000);
+              }, 2000);
             }
           });
         } else {
           console.log('⚠️ Google Analytics not loaded or conversion data missing, redirecting without tracking');
           setTimeout(() => {
-            console.log('🚀 Redirecting after 3 seconds...');
+            console.log('🚀 Redirecting after 2 seconds...');
             window.location.href = '${mainWebsiteUrl}';
-          }, 3000);
+          }, 2000);
         }
       }
 
