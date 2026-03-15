@@ -105,6 +105,22 @@ export const generateClassicTemplate = (project: Project): string => {
           window.location.href = '${mainWebsiteUrl}';
         }, 3000);
       }
+
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof(url) != 'undefined') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'conversion', {
+          'send_to': '${googleConversionId}/${googleConversionLabel}',
+          'value': ${conversionValue},
+          'currency': '${conversionCurrency}',
+          'transaction_id': '',
+          'event_callback': callback
+        });
+        return false;
+      }
     </script>
   `;
 
