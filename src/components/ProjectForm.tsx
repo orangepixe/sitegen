@@ -29,6 +29,8 @@ const ProjectForm: React.FC<ProjectFormProps> = ({ project, onSave, onCancel }) 
     googleTagId: '',
     googleConversionId: '',
     googleConversionLabel: '',
+    conversionValue: '1.0',
+    conversionCurrency: 'AUD',
     template: 'modern',
     productPhotos: [],
     ...project,
