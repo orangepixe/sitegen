@@ -175,7 +175,7 @@ export const generateClassicTemplate = (project: Project): string => {
       ${project.productPhotos.length > 0 ? `"image": "${project.productPhotos[0]}",` : ''}
       "offers": {
         "@type": "Offer",
-        "priceCurrency": "USD",
+        "priceCurrency": "${conversionCurrency}",
         "price": "${project.price.replace(/[^0-9.]/g, '')}",
         "availability": "https://schema.org/InStock",
         "url": "${mainWebsiteUrl}"
