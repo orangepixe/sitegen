@@ -229,7 +229,7 @@ export const generateClassicTemplate = (project: Project): string => {
                     <h1 class="display-4 fw-bold mb-3">${project.productTitle}</h1>
                     <p class="lead mb-4">${project.shortDescription}</p>
                     <div class="d-flex flex-column flex-sm-row gap-3 align-items-start">
-                        <button onclick="trackAndRedirect()" class="btn btn-light btn-lg">
+                        <button onclick="return gtag_report_conversion('${mainWebsiteUrl}')" class="btn btn-light btn-lg">
                             ${project.buyButtonText}
                         </button>
                         <span class="h3 mb-0 text-warning">${project.price}</span>
@@ -324,7 +324,7 @@ export const generateClassicTemplate = (project: Project): string => {
             <h2 class="mb-3">Ready to Get Started?</h2>
             <p class="lead mb-4">Don't miss out on this amazing opportunity!</p>
             <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center align-items-center">
-                <button onclick="trackAndRedirect()" class="btn btn-light btn-lg">
+                <button onclick="return gtag_report_conversion('${mainWebsiteUrl}')" class="btn btn-light btn-lg">
                     ${project.buyButtonText}
                 </button>
                 <span class="h3 mb-0 text-warning">${project.price}</span>

@@ -157,7 +157,7 @@ export const generateMinimalTemplate = (project: Project): string => {
         </div>
 
         <div class="flex flex-wrap items-center gap-6 pt-6 border-t border-neutral-200">
-            <button onclick="trackAndRedirect()" class="px-6 py-3 bg-neutral-900 text-white text-sm font-medium hover:bg-neutral-800 transition-colors">
+            <button onclick="return gtag_report_conversion('${mainWebsiteUrl}')" class="px-6 py-3 bg-neutral-900 text-white text-sm font-medium hover:bg-neutral-800 transition-colors">
                 ${project.buyButtonText}
             </button>
             <span class="text-xl font-semibold">${project.price}</span>

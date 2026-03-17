@@ -135,7 +135,7 @@ export const generateRealestateTemplate = (project: Project): string => {
                     <p class="text-2xl md:text-3xl font-bold text-teal-700">${project.price}</p>
                     <p class="text-sm text-stone-500 mt-1">${project.websiteName}</p>
                 </div>
-                <button onclick="trackAndRedirect()" class="w-full md:w-auto px-8 py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors shadow-sm">
+                <button onclick="return gtag_report_conversion('${mainWebsiteUrl}')" class="w-full md:w-auto px-8 py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors shadow-sm">
                     ${project.buyButtonText}
                 </button>
             </div>

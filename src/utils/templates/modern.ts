@@ -218,7 +218,7 @@ export const generateModernTemplate = (project: Project): string => {
                 <h1 class="text-4xl md:text-6xl font-bold mb-6">${project.productTitle}</h1>
                 <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">${project.shortDescription}</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <button onclick="trackAndRedirect()" class="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition duration-300">
+                    <button onclick="return gtag_report_conversion('${mainWebsiteUrl}')" class="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition duration-300">
                         ${project.buyButtonText}
                     </button>
                     <span class="text-2xl font-bold">${project.price}</span>
@@ -298,7 +298,7 @@ export const generateModernTemplate = (project: Project): string => {
             <h2 class="text-3xl font-bold mb-4">Ready to Get Started?</h2>
             <p class="text-xl mb-8">Don't miss out on this amazing opportunity!</p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <button onclick="trackAndRedirect()" class="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition duration-300">
+                <button onclick="return gtag_report_conversion('${mainWebsiteUrl}')" class="bg-white text-blue-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition duration-300">
                     ${project.buyButtonText}
                 </button>
                 <span class="text-2xl font-bold">${project.price}</span>

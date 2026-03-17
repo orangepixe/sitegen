@@ -121,7 +121,7 @@ export const generateHeavyequipmentTemplate = (project: Project): string => {
                     <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">${project.productTitle}</h1>
                     <p class="text-slate-400 mt-4 text-lg">${project.shortDescription}</p>
                     <div class="mt-8 flex flex-wrap items-center gap-4">
-                        <button onclick="trackAndRedirect()" class="px-8 py-3 bg-orange-500 text-white font-bold rounded hover:bg-orange-600 transition-colors">
+                        <button onclick="return gtag_report_conversion('${mainWebsiteUrl}')" class="px-8 py-3 bg-orange-500 text-white font-bold rounded hover:bg-orange-600 transition-colors">
                             ${project.buyButtonText}
                         </button>
                         <span class="text-2xl font-bold text-orange-400">${project.price}</span>
@@ -160,9 +160,8 @@ export const generateHeavyequipmentTemplate = (project: Project): string => {
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-2xl font-bold mb-2">Ready to get a quote?</h2>
             <p class="text-slate-400 mb-6">${project.shortDescription}</p>
-            <button onclick="trackAndRedirect()" class="px-10 py-3 bg-orange-500 text-white font-bold rounded hover:bg-orange-600 transition-colors">
+            <button onclick="return gtag_report_conversion('${mainWebsiteUrl}')" class="px-10 py-3 bg-orange-500 text-white font-bold rounded hover:bg-orange-600 transition-colors">
                 ${project.buyButtonText}
-            </button>
             <span class="block mt-3 text-orange-400 font-semibold">${project.price}</span>
         </div>
     </section>

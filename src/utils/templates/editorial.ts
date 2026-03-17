@@ -164,7 +164,7 @@ export const generateEditorialTemplate = (project: Project): string => {
                 <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight mb-6">${project.productTitle}</h1>
                 <p class="text-lg text-neutral-600 leading-relaxed mb-8">${project.shortDescription}</p>
                 <div class="flex flex-wrap items-center gap-6">
-                    <button onclick="trackAndRedirect()" class="bg-neutral-900 text-white px-8 py-3 font-medium hover:bg-neutral-800 transition-colors">
+                    <button onclick="return gtag_report_conversion('${mainWebsiteUrl}')" class="bg-neutral-900 text-white px-8 py-3 font-medium hover:bg-neutral-800 transition-colors">
                         ${project.buyButtonText}
                     </button>
                     <span class="font-serif text-2xl font-semibold">${project.price}</span>
@@ -199,9 +199,8 @@ export const generateEditorialTemplate = (project: Project): string => {
         <div class="max-w-5xl mx-auto px-6 text-center">
             <h2 class="font-serif text-3xl font-semibold mb-4">Ready to get started?</h2>
             <p class="text-neutral-400 mb-8 max-w-xl mx-auto">${project.shortDescription}</p>
-            <button onclick="trackAndRedirect()" class="bg-white text-neutral-900 px-8 py-3 font-medium hover:bg-neutral-100 transition-colors">
+            <button onclick="return gtag_report_conversion('${mainWebsiteUrl}')" class="bg-white text-neutral-900 px-8 py-3 font-medium hover:bg-neutral-100 transition-colors">
                 ${project.buyButtonText}
-            </button>
             <span class="block mt-4 font-serif text-xl">${project.price}</span>
         </div>
     </section>
